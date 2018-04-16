@@ -13,7 +13,7 @@ before_install:
 - which pip
 - curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
 - brew install ./qt5.rb
-- brew install cmake libxslt libxml2
+- brew install libxslt libxml2
 - pip install wheel sphinx
 
 install:
