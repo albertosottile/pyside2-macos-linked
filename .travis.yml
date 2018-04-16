@@ -6,7 +6,7 @@ branches:
   - master
 
 script:
-- python setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+- python setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin --jobs=3
 
 before_install:
 - which python
