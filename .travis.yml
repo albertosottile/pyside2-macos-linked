@@ -6,7 +6,7 @@ branches:
   - master
 
 script:
-- python setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+- python setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
 
 before_install:
 - which python
@@ -14,7 +14,7 @@ before_install:
 - curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
 - brew install ./qt5.rb
 - brew install libxslt
-#- pip install sphinx
+- pip install --upgrade pip setuptools wheel
 
 install:
 - git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup        
