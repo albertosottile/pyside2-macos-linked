@@ -1,13 +1,13 @@
 language: objective-c
-osx_image: xcode8.3
+osx_image: xcode7.3
 
 branches:
   only:
-  - qt59
+  - qt510
 
 env:
   global:
-    - QT_VER=5.9.3
+    - QT_VER=5.10.1
     - CI_QMAKE=/usr/local/opt/qt/bin/qmake
     - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
 
@@ -15,10 +15,10 @@ script:
 - python2 setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
-- which python2
-- which pip2
-- curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/13d52537d1e0e5f913de46390123436d220035f6/Formula/qt.rb
-- brew install ./qt.rb
+- which python
+- which pip
+- brew update
+- brew install qt
 - brew install libxslt
 - pip2 install --upgrade pip setuptools wheel
 - brew install tree p7zip
@@ -37,7 +37,7 @@ before_deploy:
 
 deploy:
   skip_cleanup: true
-  on: qt59
+  on: qt510
   provider: bintray
   file: "bintray.json"
   user: alby128
