@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8.3
+osx_image: xcode7.3
 
 branches:
   only:
@@ -15,13 +15,14 @@ script:
 - python2 setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
-- which python2
-- which pip2
-- curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/13d52537d1e0e5f913de46390123436d220035f6/Formula/qt.rb
-- brew install ./qt.rb
+- which python
+- which pip
 - brew install libxslt
 - pip2 install --upgrade pip setuptools wheel
 - brew install tree p7zip
+- brew update
+- curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/13d52537d1e0e5f913de46390123436d220035f6/Formula/qt.rb
+- brew install ./qt.rb
 - curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
 - 7z x ${LIBCLANG_FILE}
 - export CLANG_INSTALL_DIR=$(pwd)/libclang
