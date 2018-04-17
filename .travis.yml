@@ -12,16 +12,16 @@ env:
     - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
 
 script:
-- python2 setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
+- python setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
 - which python
 - which pip
+- brew install libxslt
+- pip install --upgrade pip setuptools wheel
+- brew install tree p7zip
 - brew update
 - brew install qt
-- brew install libxslt
-- pip2 install --upgrade pip setuptools wheel
-- brew install tree p7zip
 - curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
 - 7z x ${LIBCLANG_FILE}
 - export CLANG_INSTALL_DIR=$(pwd)/libclang
