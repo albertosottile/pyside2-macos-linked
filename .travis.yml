@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.3
 
 branches:
   only:
@@ -17,7 +17,8 @@ script:
 before_install:
 - which python
 - which pip
-- brew install qt5
+- curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/13d52537d1e0e5f913de46390123436d220035f6/Formula/qt.rb
+- brew install ./qt.rb
 - brew install libxslt
 - pip install --upgrade pip setuptools wheel
 - brew install tree p7zip
