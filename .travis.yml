@@ -7,7 +7,7 @@ branches:
 
 script:
 - brew install --only-dependencies --build-bottle albertosottile/qt59/qt
-- brew install --build-bottle albertosottile/qt59/qt
+- travis_wait 90 brew install --build-bottle albertosottile/qt59/qt
 - brew bottle albertosottile/qt59/qt
 
 install:
