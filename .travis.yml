@@ -3,38 +3,27 @@ osx_image: xcode7.3
 
 branches:
   only:
-  - qt59
-
-env:
-  global:
-    - QT_VER=5.9.3
-    - CI_QMAKE=/usr/local/opt/qt/bin/qmake
-    - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
+  - qt-bottle
 
 script:
-- python2 setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
-
-before_install:
-- which python
-- which pip
-- brew install libxslt
-- pip2 install --upgrade pip setuptools wheel
-- brew install tree p7zip
-- brew update
-- curl -O http://syncplay.s3.amazonaws.com/qt.rb
-- brew install ./qt.rb
-- curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
-- 7z x ${LIBCLANG_FILE}
-- export CLANG_INSTALL_DIR=$(pwd)/libclang
-- rm -rf ${LIBCLANG_FILE}
+- brew install --only-dependencies --build-bottle albertosottile/qt59/qt
+- brew install --build-bottle albertosottile/qt59/qt
+- brew bottle albertosottile/qt59/qt
 
 install:
-- git clone --recursive --branch 5.9 https://codereview.qt-project.org/pyside/pyside-setup        
-- cd pyside-setup
+- brew update
+- curl -O http://syncplay.s3.amazonaws.com/qt595.rb
+- mkdir qt59
+- mv qt595.rb qt59/qt.rb
+- cd qt59
+- git init
+- git add qt.rb
+- git commit -m "Initial commit"
+- cd ..
+- brew tap albertosottile/homebrew-qt59 qt59
 
 before_deploy:
-- cd ..
-- ls -l pyside-setup/dist
+- ls -al qt-*
 
 deploy:
   skip_cleanup: true
