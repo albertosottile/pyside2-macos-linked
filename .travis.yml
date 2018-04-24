@@ -16,7 +16,7 @@ script:
 
 before_install:
 - brew update
-- brew upgrade
+- brew upgrade python
 - which python
 - python --version
 - which pip
