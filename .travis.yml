@@ -24,10 +24,10 @@ before_install:
 - brew install libxslt libxml2
 - pip2 install --upgrade setuptools wheel
 - brew install tree p7zip
-- if [ ! -d "${QT_INSTALL_PATH}" ] ; then curl -L -O https://download.qt.io/archive/qt/${QT_VER_SHORT}/${QT_VER}/${QT_INSTALLER_FILE}.dmg ; fi
-- if [ ! -d "${QT_INSTALL_PATH}" ] ; then hdiutil attach -noverify ${QT_INSTALLER_FILE}.dmg ; fi
-- if [ ! -d "${QT_INSTALL_PATH}" ] ; then travis_wait 20 /Volumes/${QT_INSTALLER_FILE}/${QT_INSTALLER_FILE}.app/Contents/MacOS/${QT_INSTALLER_FILE} --script qt-installer-${QT_VER}-noninteractive.qs -platform minimal ; fi
-- if [ -d "/Volumes/${QT_INSTALLER_FILE}" ] ; then hdiutil detach /Volumes/${QT_INSTALLER_FILE} ; fi
+- curl -L -O https://download.qt.io/archive/qt/${QT_VER_SHORT}/${QT_VER}/${QT_INSTALLER_FILE}.dmg
+- hdiutil attach -noverify ${QT_INSTALLER_FILE}.dmg
+- travis_wait 20 /Volumes/${QT_INSTALLER_FILE}/${QT_INSTALLER_FILE}.app/Contents/MacOS/${QT_INSTALLER_FILE} --script qt-installer-${QT_VER}-noninteractive.qs
+- hdiutil detach /Volumes/${QT_INSTALLER_FILE}
 - rm -rf ${QT_INSTALLER_FILE}.dmg
 - curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
 - 7z x ${LIBCLANG_FILE}
