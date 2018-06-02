@@ -32,6 +32,7 @@ before_install:
 install:
 - git clone --recursive --branch 5.9 https://codereview.qt-project.org/pyside/pyside-setup        
 - cd pyside-setup
+- git checkout 9dc1aa57dfbf9c684e5c75451dd028b88099c348
 
 before_deploy:
 - cd ..
