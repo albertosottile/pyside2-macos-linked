@@ -30,8 +30,11 @@ before_install:
 - rm -rf ${LIBCLANG_FILE}
 
 install:
+- curl -O http://syncplay.s3.amazonaws.com/QSocketNotifier.patch
 - git clone --recursive --branch 5.9 https://codereview.qt-project.org/pyside/pyside-setup        
 - cd pyside-setup
+- git rm sources/pyside2/tests/QtCore/qsocketnotifier_test.py
+- git apply ../QSocketNotifier.patch
 
 before_deploy:
 - cd ..
