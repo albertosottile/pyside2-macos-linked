@@ -22,7 +22,7 @@ before_install:
 - which python2
 - which pip2
 - brew install libxslt libxml2
-- pip2 install --upgrade pip setuptools wheel
+- pip2 install --upgrade setuptools wheel
 - brew install tree p7zip
 - if [ ! -d "${QT_INSTALL_PATH}" ] ; then curl -L -O https://download.qt.io/archive/qt/${QT_VER_SHORT}/${QT_VER}/${QT_INSTALLER_FILE}.dmg ; fi
 - if [ ! -d "${QT_INSTALL_PATH}" ] ; then hdiutil attach -noverify ${QT_INSTALLER_FILE}.dmg ; fi
