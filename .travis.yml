@@ -1,29 +1,34 @@
 language: objective-c
-osx_image: xcode7.3
+osx_image: xcode9.3
 
 branches:
   only:
-  - qt59
+  - qt59-highsierra
 
 env:
   global:
+    - PYSIDE_BRANCH=5.9
+    - QT_VER_SHORT=5.9
     - QT_VER=5.9.5
     - CI_QMAKE=/usr/local/opt/qt/bin/qmake
     - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
+    - QT_INSTALLER_FILE=qt-opensource-mac-x64-${QT_VER}
+    - QT_INSTALL_PATH=${HOME}/Qt-${QT_VER}
 
 script:
-- python setup.py bdist_wheel --debug --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
+- python2 setup.py bdist_wheel --debug --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
-- which python
-- which pip
-- brew install libxslt
-- pip install --upgrade pip setuptools wheel
+- which python2
+- which pip2
+- brew install libxslt libxml2
+- pip2 install --upgrade pip setuptools wheel
 - brew install tree p7zip
-- brew update
-- curl -O http://syncplay.s3.amazonaws.com/qt595.rb
-- mv qt595.rb qt.rb
-- brew install ./qt.rb
+- if [ ! -d "${QT_INSTALL_PATH}" ] ; then curl -L -O https://download.qt.io/archive/qt/${QT_VER_SHORT}/${QT_VER}/${QT_INSTALLER_FILE}.dmg ; fi
+- if [ ! -d "${QT_INSTALL_PATH}" ] ; then hdiutil attach -noverify ${QT_INSTALLER_FILE}.dmg ; fi
+- if [ ! -d "${QT_INSTALL_PATH}" ] ; then travis_wait 20 /Volumes/${QT_INSTALLER_FILE}/${QT_INSTALLER_FILE}.app/Contents/MacOS/${QT_INSTALLER_FILE} --script qt-installer-${QT_VER}-noninteractive.qs -platform minimal ; fi
+- if [ -d "/Volumes/${QT_INSTALLER_FILE}" ] ; then hdiutil detach /Volumes/${QT_INSTALLER_FILE} ; fi
+- rm -rf ${QT_INSTALLER_FILE}.dmg
 - curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
 - 7z x ${LIBCLANG_FILE}
 - export CLANG_INSTALL_DIR=$(pwd)/libclang
@@ -40,7 +45,7 @@ before_deploy:
 
 deploy:
   skip_cleanup: true
-  on: qt59
+  on: qt59-highsierra
   provider: bintray
   file: "bintray.json"
   user: alby128
