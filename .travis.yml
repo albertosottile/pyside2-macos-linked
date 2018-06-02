@@ -12,7 +12,7 @@ env:
     - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
 
 script:
-- python setup.py bdist_wheel --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
+- python setup.py bdist_wheel --debug --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
 - which python
@@ -32,7 +32,7 @@ before_install:
 install:
 - git clone --recursive --branch 5.9 https://codereview.qt-project.org/pyside/pyside-setup        
 - cd pyside-setup
-- git checkout 43451e3bc17467593df64cb73ce8c0bf9e60045f
+#- git checkout 43451e3bc17467593df64cb73ce8c0bf9e60045f
 
 before_deploy:
 - cd ..
