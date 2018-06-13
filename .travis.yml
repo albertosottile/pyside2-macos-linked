@@ -7,12 +7,12 @@ branches:
 
 env:
   global:
-    - QT_VER=5.10.1
+    - QT_VER=5.11.0
     - CI_QMAKE=/usr/local/opt/qt/bin/qmake
     - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
 
 script:
-- python setup.py bdist_wheel --ignore-git --no-examples --osx-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
+- python setup.py bdist_wheel --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
 - which python
@@ -28,8 +28,11 @@ before_install:
 - rm -rf ${LIBCLANG_FILE}
 
 install:
-- git clone --recursive --branch 5.9 https://codereview.qt-project.org/pyside/pyside-setup        
+- curl -O http://syncplay.s3.amazonaws.com/QSocketNotifier.patch
+- git clone --recursive --branch v5.11.0 https://codereview.qt-project.org/pyside/pyside-setup        
 - cd pyside-setup
+- git rm sources/pyside2/tests/QtCore/qsocketnotifier_test.py
+- git apply ../QSocketNotifier.patch
 
 before_deploy:
 - cd ..
