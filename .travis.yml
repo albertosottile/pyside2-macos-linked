@@ -23,7 +23,7 @@ before_install:
 - pip3 --version
 - brew install libxslt
 - pip3 install --upgrade pip setuptools wheel
-- brew install tree p7zip
+- brew install tree
 - brew install llvm
 - brew install qt
 
