@@ -9,7 +9,7 @@ env:
   global:
     - QT_VER=5.11.0
     - CI_QMAKE=/usr/local/opt/qt/bin/qmake
-    - LIBCLANG_FILE=libclang-release_50-mac-clazy.7z
+    - CLANG_INSTALL_DIR=/usr/local/opt/llvm
 
 script:
 - python setup.py bdist_wheel --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
@@ -19,20 +19,19 @@ before_install:
 - which pip
 - brew install libxslt
 - pip install --upgrade pip setuptools wheel
-- brew install tree p7zip
+- brew install tree
+- brew install llvm
 - brew update
 - brew install qt
-- curl -L -O http://download.qt.io/development_releases/prebuilt/libclang/${LIBCLANG_FILE}
-- 7z x ${LIBCLANG_FILE}
-- export CLANG_INSTALL_DIR=$(pwd)/libclang
-- rm -rf ${LIBCLANG_FILE}
 
 install:
 - curl -O http://syncplay.s3.amazonaws.com/QSocketNotifier.patch
+- curl -O http://syncplay.s3.amazonaws.com/syncplayID.patch
 - git clone --recursive --branch v5.11.0 https://codereview.qt-project.org/pyside/pyside-setup        
 - cd pyside-setup
 - git rm sources/pyside2/tests/QtCore/qsocketnotifier_test.py
 - git apply ../QSocketNotifier.patch
+- git apply ../syncplayID.patch
 
 before_deploy:
 - cd ..
