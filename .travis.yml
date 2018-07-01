@@ -29,7 +29,8 @@ install:
 #- curl -O http://syncplay.s3.amazonaws.com/QSocketNotifier.patch
 #- curl -O http://syncplay.s3.amazonaws.com/syncplayID.patch
 #- git clone --recursive --branch v5.11.0 https://codereview.qt-project.org/pyside/pyside-setup
-- curl -L -O https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.0-src/pyside-setup-everywhere-src-5.11.0.tar.xz
+- curl -L -O https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.0-src/${PYSIDE2_SOURCES_FILE}
+- tar -xvf ${PYSIDE2_SOURCES_FILE}
 - cd pyside-setup-everywhere-src-5.11.0
 #- git rm sources/pyside2/tests/QtCore/qsocketnotifier_test.py
 #- git apply ../QSocketNotifier.patch
