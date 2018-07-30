@@ -12,7 +12,7 @@ env:
     - CLANG_INSTALL_DIR=/usr/local/opt/llvm
 
 script:
-- python3 setup.py bdist_wheel --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
+- travis_wait 60 python3 setup.py bdist_wheel --ignore-git --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3
 
 before_install:
 - brew uninstall python
