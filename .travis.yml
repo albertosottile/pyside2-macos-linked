@@ -12,7 +12,7 @@ env:
     - CLANG_INSTALL_DIR=/usr/local/opt/llvm
 
 script:
-- python3 setup.py bdist_wheel --ignore-git --skip-docs --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3 --skip-modules=3DAnimation --skip-modules=3DCore --skip-modules=3DExtras --skip-modules=3DInput --skip-modules=3DLogic --skip-modules=3DRender --skip-modules=AxContainer --skip-modules=Charts --skip-modules=Concurrent --skip-modules=DataVisualization --skip-modules=Help --skip-modules=Location --skip-modules=Multimedia --skip-modules=MultimediaWidgets --skip-modules=OpenGL --skip-modules=Positioning --skip-modules=PrintSupport --skip-modules=Qml --skip-modules=Quick --skip-modules=QuickWidgets --skip-modules=Scxml --skip-modules=Sensors --skip-modules=Sql --skip-modules=Svg --skip-modules=Test --skip-modules=TextToSpeech --skip-modules=UiTools --skip-modules=WebChannel --skip-modules=WebSockets --skip-modules=WinExtras --skip-modules=Xml --skip-modules=XmlPatterns
+- python3 setup.py bdist_wheel --ignore-git --skip-docs --no-examples --macos-use-libc++ --qmake=${CI_QMAKE} --cmake=/usr/local/bin/cmake --jobs=3 --module-subset=Core,Gui,Network,PrintSupport,Qml,Test,UiTools,Widgets
 
 before_install:
 - brew uninstall python
