@@ -36,6 +36,8 @@ before_deploy:
 #- python3 -c "from PySide2.QtCore import __version__; print(__version__)"
 - ls -l
 - ls -l dist
+- mv dist ../dist
+- cd ..
 
 deploy:
   skip_cleanup: true

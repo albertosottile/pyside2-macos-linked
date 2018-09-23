@@ -11,7 +11,7 @@
 
     "files":
         [
-        {"includePattern": "pyside-setup/dist/(.*)", "uploadPattern": "$1", 
+        {"includePattern": "dist/(.*)", "uploadPattern": "$1",
            "matrixParams": {
            "override": 1 }}
 	    ],
