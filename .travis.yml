@@ -8,7 +8,7 @@ branches:
 env:
   global:
     - QT_VER=5.11.2
-    - PYSIDE2_SOURCES_FILE=pyside-setup-everywhere-src-5.11.2.tar.xz
+    - PYSIDE2_SOURCES_FILE_NAME=pyside-setup-everywhere-src-5.11.2
     - CI_QMAKE=/usr/local/opt/qt/bin/qmake
     - CLANG_INSTALL_DIR=/usr/local/opt/llvm
 
@@ -28,12 +28,12 @@ before_install:
 - brew install qt
 
 install:
-- curl -L -O https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.11.2-src/${PYSIDE2_SOURCES_FILE}
-- tar -xvf ${PYSIDE2_SOURCES_FILE}
-- cd pyside-setup-everywhere-src-5.11.2
+- curl -L -O https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-${QT_VER}-src/${PYSIDE2_SOURCES_FILE_NAME}.tar.xz
+- tar -xvf ${PYSIDE2_SOURCES_FILE_NAME}.tar.xz
+- cd ${PYSIDE2_SOURCES_FILE_NAME}
 
 before_deploy:
-- python3 -c "from PySide2.QtCore import __version__; print __version__"
+- python3 -c "from PySide2.QtCore import __version__; print(__version__)"
 - ls -l
 - ls -l dist
 
