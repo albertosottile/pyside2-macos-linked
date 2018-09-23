@@ -33,7 +33,7 @@ install:
 - cd ${PYSIDE2_SOURCES_FILE_NAME}
 
 before_deploy:
-- python3 -c "from PySide2.QtCore import __version__; print(__version__)"
+#- python3 -c "from PySide2.QtCore import __version__; print(__version__)"
 - ls -l
 - ls -l dist
 
