@@ -19,10 +19,10 @@ before_install:
 - brew uninstall python
 - brew update
 - brew install python
-- which python
-- which pip
+- which python3
+- which pip3
 - brew install libxslt
-- pip install --upgrade pip setuptools wheel
+- pip3 install --upgrade pip setuptools wheel
 - brew install tree
 - brew install llvm
 - brew install qt
@@ -33,7 +33,7 @@ install:
 - cd pyside-setup-everywhere-src-5.11.2
 
 before_deploy:
-- python -c "from PySide2.QtCore import __version__; print __version__"
+- python3 -c "from PySide2.QtCore import __version__; print __version__"
 - ls -l
 - ls -l dist
 
