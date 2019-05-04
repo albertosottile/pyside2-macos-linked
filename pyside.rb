@@ -1,8 +1,8 @@
 class Pyside < Formula
   desc "Official Python bindings for Qt"
   homepage "https://wiki.qt.io/Qt_for_Python"
-  url "https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.2-src/pyside-setup-everywhere-src-5.12.2.tar.xz"
-  sha256 "ed974c0592019cbbcd4e4db3b18cf4f2af2c399cc1650e5c526be3efd7562bc1"
+  url "https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-5.12.3-src/pyside-setup-everywhere-src-5.12.3.tar.xz"
+  sha256 "4f7aab7d4bbaf1b3573cc989d704e87b0de55cce656ae5e23418a88baa4c6842"
 
   depends_on "cmake" => :build
   depends_on "llvm" => :build
@@ -15,6 +15,7 @@ class Pyside < Formula
     args = %W[
       --ignore-git
       --parallel=#{ENV.make_jobs}
+      --module-subset=Core,Gui,Widgets
       --reuse-build
       --install-scripts #{bin}
     ]
@@ -34,19 +35,12 @@ class Pyside < Formula
   end
 
   test do
-    ["python3", "python2"].each do |python|
+    ["python3"].each do |python|
       system python, "-c", "import PySide2"
       %w[
         Core
         Gui
-        Location
-        Multimedia
-        Network
-        Quick
-        Svg
-        WebEngineWidgets
         Widgets
-        Xml
       ].each { |mod| system python, "-c", "import PySide2.Qt#{mod}" }
     end
   end
